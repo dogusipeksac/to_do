@@ -7,22 +7,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.to_do.Model.toDoData;
+import com.example.to_do.Model.ToDoData;
 import com.example.to_do.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
-import java.util.zip.Inflater;
 
-public class toDoAdapter extends RecyclerView.Adapter<toDoAdapter.MyViewHolder> {
+public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<toDoData> dataList;
+    private List<ToDoData> dataList;
     private OnItemClickListener mListener;
 
 
@@ -35,7 +31,7 @@ public class toDoAdapter extends RecyclerView.Adapter<toDoAdapter.MyViewHolder> 
         mListener=listener;
     }
 
-    public toDoAdapter(Context mContext, List<toDoData> dataList) {
+    public ToDoAdapter(Context mContext, List<ToDoData> dataList) {
         this.mContext = mContext;
         this.dataList = dataList;
     }
@@ -51,16 +47,15 @@ public class toDoAdapter extends RecyclerView.Adapter<toDoAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder( toDoAdapter.MyViewHolder holder, int position) {
-
-
-
+    public void onBindViewHolder(ToDoAdapter.MyViewHolder holder, int position) {
+        dataList.get(position).setImgUrl("https://picsum.photos/200?random="+position);
         holder.id.setText("Id:"+dataList.get(position).getId());
         holder.title.setText("Title:"+dataList.get(position).getTitle());
         holder.userId.setText("UserId:"+dataList.get(position).getUserId());
 
+
       Glide.with(mContext)
-                .load("https://picsum.photos/200/300")
+                .load(dataList.get(position).getImgUrl())
               .fitCenter()
               .centerInside()
               .into(holder.imageView);
@@ -96,6 +91,7 @@ public class toDoAdapter extends RecyclerView.Adapter<toDoAdapter.MyViewHolder> 
                     }
                 }
             });
+
         }
     }
 }

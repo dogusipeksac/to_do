@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">to_Do</string>
+    <string name="app_name">To Do List</string>
+    <!--<string name="api_url">https://picsum.photos/200</string>-->
 </resources>

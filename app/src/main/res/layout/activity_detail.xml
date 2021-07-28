@@ -12,20 +12,20 @@
     android:layout_height="200dp"
     android:src="@mipmap/ic_launcher"
     android:id="@+id/image_detail_view"
-    android:layout_margin="30dp"/>
+    android:layout_margin="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="title:"
         android:id="@+id/titletext"
-        android:layout_margin="30dp"
-        android:textSize="30dp"
+        android:layout_margin="20dp"
+        android:textSize="25dp"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="id:"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:textSize="20dp"
         android:id="@+id/idTEXT"
         android:textStyle="bold"/>
@@ -34,7 +34,7 @@
         android:id="@+id/useridtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
         android:text="User Id:"
         android:textSize="20dp"
         android:textStyle="bold" />

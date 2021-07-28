@@ -20,6 +20,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent=getIntent();
         String imgUrl=intent.getStringExtra("imageUrl");
@@ -34,7 +35,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         Glide.with(this)
-                .load("https://picsum.photos/200/300")
+                .load( imgUrl)
                 .fitCenter()
                 .centerInside()
                 .into(imageView);

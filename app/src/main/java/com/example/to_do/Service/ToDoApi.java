@@ -1,13 +1,13 @@
 package com.example.to_do.Service;
 
-import com.example.to_do.Model.toDoData;
+import com.example.to_do.Model.ToDoData;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface toDoApi {
+public interface ToDoApi {
     @GET("todos/")
-    Call<List<toDoData>> getData();
+    Call<List<ToDoData>> getData();
 }

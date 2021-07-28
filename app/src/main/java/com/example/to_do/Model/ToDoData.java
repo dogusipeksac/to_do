@@ -1,16 +1,20 @@
 package com.example.to_do.Model;
 
-public class toDoData {
+public class ToDoData {
     //value
     private String userId;
     private String id;
     private String title;
     private String imgUrl;
 
-    public toDoData(String userId, String id, String title, String imgUrl) {
+    public ToDoData(String userId, String id, String title, String imgUrl) {
         this.userId = userId;
         this.id = id;
         this.title = title;
+        this.imgUrl = imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
