@@ -5,15 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="15dp"
-    android:background="@android:color/darker_gray">
+    app:cardCornerRadius="15dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
-
-
 
             <ImageView
                 android:id="@+id/image"
@@ -21,16 +18,15 @@
                 android:layout_gravity="center"
                 android:scaleType="centerInside"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher" />
-
-
+                android:src="@mipmap/ic_launcher"
+                android:layout_margin="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/titletxt"
             android:textSize="30dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:textStyle="bold"
             android:text="Title:"/>
         <TextView
@@ -40,23 +36,17 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:text="User Id:"
-            android:layout_margin="5dp"/>
+            android:layout_margin="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/idtxt"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:text="Id:"/>
 
-
     </LinearLayout>
-
-
-
-
-
 
 
 </androidx.cardview.widget.CardView>

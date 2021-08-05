@@ -1,28 +1,26 @@
 package com.example.to_do;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.to_do.Adapter.ToDoAdapter;
+import com.example.to_do.Dialog.LoadingDialog;
 import com.example.to_do.Model.ToDoData;
 import com.example.to_do.Service.ToDoApi;
 import com.example.to_do.Service.TodoService;
 import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 import java.util.List;
@@ -40,24 +38,25 @@ public class MainActivity extends AppCompatActivity implements ToDoAdapter.OnIte
     RecyclerView recyclerView;
 
     ToDoAdapter adapter;
-    TextView user_name;
-    ImageView user_profile_Image;
     List<ToDoData> list;
-
+    LoadingDialog dialog;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        user_name=findViewById(R.id.user_name_txt);
-        user_profile_Image=findViewById(R.id.user_imageView);
+
         list=TodoService.get().getList();
+        dialog=new LoadingDialog(this);
         recyclerView=findViewById(R.id.recyView);
         recyclerView.setHasFixedSize(true);
+        toolbar=findViewById(R.id.main);
+        setSupportActionBar(toolbar);
+
         if(AccessToken.getCurrentAccessToken()==null){
             goLoginScreen();
         }
         else{
-            loadUserProfile(AccessToken.getCurrentAccessToken());
             callToDo();
         }
     }
@@ -67,31 +66,7 @@ public class MainActivity extends AppCompatActivity implements ToDoAdapter.OnIte
         super.onStart();
     }
 
-    private void loadUserProfile(AccessToken currentAccessToken) {
-        GraphRequest request=GraphRequest.newMeRequest(currentAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                try {
-                    String name=object.getString("name");
-                    user_name.setText(name);
-                    String img=object.getJSONObject("picture").getJSONObject("data").getString("url");
-                    Glide.with(getApplicationContext())
-                            .load(img)
-                            .fitCenter()
-                            .centerInside()
-                            .into(user_profile_Image);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Bundle bundle=new Bundle();
-        bundle.putString("fields","name,picture.width(150).height(150)");
-        request.setParameters(bundle);
-        request.executeAsync();
-
-    }
 
     @Override
     protected void onResume() {
@@ -154,9 +129,54 @@ public class MainActivity extends AppCompatActivity implements ToDoAdapter.OnIte
         });
     }
 
-    public void logoutButton(View view) {
-        LoginManager.getInstance().logOut();
-        goLoginScreen();
+    public void logout() {
+            dialog.startLoadingDialog();
+            Handler handler=new Handler();
+            handler.postDelayed(new Runnable() {
+            @Override
+            public void run()
+                {
+                    LoginManager.getInstance().logOut();
+                    goLoginScreen();
+                    dialog.dismissDialog();
+                }
+           },2000);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       int id=item.getItemId();
+       if(id==R.id.menu_profile){
+            Intent intent=new Intent(this,ProfileActivity.class);
+            startActivity(intent);
+       }
+       if(id==R.id.menu_exit){
+           AlertDialog.Builder builder=new AlertDialog.Builder(this);
+           builder.setTitle("Are you sure to exit ?")
+                   .setMessage("Click yes to confirm")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            logout();
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+               @Override
+               public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+               }
+           });
+           AlertDialog alertDialog=builder.create();
+           alertDialog.show();
+
+
+
+        }
+       return true;
+    }
 }

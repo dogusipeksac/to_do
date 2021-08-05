@@ -1,9 +1,13 @@
 package com.example.to_do;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,12 +19,11 @@ public class DetailActivity extends AppCompatActivity {
     TextView idtxt;
     TextView titleTxt;
     ImageView imageView;
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent=getIntent();
         String imgUrl=intent.getStringExtra("imageUrl");
@@ -32,6 +35,9 @@ public class DetailActivity extends AppCompatActivity {
         idtxt=findViewById(R.id.idTEXT);
         titleTxt=findViewById(R.id.titletext);
         imageView=findViewById(R.id.image_detail_view);
+        toolbar=findViewById(R.id.detail);
+        setSupportActionBar(toolbar);
+
 
 
         Glide.with(this)
@@ -42,5 +48,21 @@ public class DetailActivity extends AppCompatActivity {
         idtxt.setText("id :"+id);
         titleTxt.setText("title :"+title);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.detail_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.back){
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+        }
+        return true;
     }
 }

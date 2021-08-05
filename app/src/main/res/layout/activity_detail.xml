@@ -5,15 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailActivity"
-    android:layout_margin="30dp">
+    tools:context=".DetailActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/appColor"
+        app:titleTextColor="@color/white"
+        app:title="To-Do List Detail Page"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:src="@drawable/unnamed"
     android:scaleType="centerInside"
     android:id="@+id/image_detail_view"
-    android:layout_margin="10dp"/>
+    android:layout_margin="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,5 +53,5 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-
+    </LinearLayout>
 </LinearLayout>
