@@ -36,14 +36,11 @@ public class DetailActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load( imgUrl)
-                .fitCenter()
-                .centerInside()
                 .into(imageView);
 
         useridtxt.setText("User id :"+userId);
         idtxt.setText("id :"+id);
         titleTxt.setText("title :"+title);
-
 
     }
 }

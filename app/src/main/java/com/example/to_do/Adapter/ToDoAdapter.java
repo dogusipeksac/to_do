@@ -48,7 +48,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(ToDoAdapter.MyViewHolder holder, int position) {
-        dataList.get(position).setImgUrl("https://picsum.photos/200?random="+position);
+        dataList.get(position).setImgUrl("https://picsum.photos/1000?random="+position);
         holder.id.setText("Id:"+dataList.get(position).getId());
         holder.title.setText("Title:"+dataList.get(position).getTitle());
         holder.userId.setText("UserId:"+dataList.get(position).getUserId());
@@ -56,8 +56,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
 
       Glide.with(mContext)
                 .load(dataList.get(position).getImgUrl())
-              .fitCenter()
-              .centerInside()
+              //.override(500,500)
               .into(holder.imageView);
 
     }
@@ -67,7 +66,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
         return dataList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class                                                                                                                                        MyViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         TextView id;
         TextView userId;
